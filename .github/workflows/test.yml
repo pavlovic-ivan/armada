@@ -137,7 +137,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.cache-info.outputs.path }}
-          key: go-unit-tests-go-${{ steps.setup-go.outputs.go-version }}-mod-${{ hashFiles('go.sum') }}
+          key: go-integration-tests-go-${{ steps.setup-go.outputs.go-version }}-mod-${{ hashFiles('go.sum') }}
 
       - name: Setup Integration Tests
         run: go run github.com/magefile/mage@v1.14.0 -v localdev minimal
