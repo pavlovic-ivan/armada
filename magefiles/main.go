@@ -43,9 +43,9 @@ func Download() error {
 		return err
 	}
 	if len(go_test_cmd) == 0 {
-		//if err = sh.Run("go", "mod", "download"); err != nil {
-		//	return err
-		//}
+		if err = sh.Run("go", "mod", "download"); err != nil {
+			return err
+		}
 		if err = sh.Run("go", "mod", "tidy"); err != nil {
 			return err
 		}
