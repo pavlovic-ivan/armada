@@ -1,4 +1,4 @@
-name: Tests
+name: PoC
 
 on:
   push:
@@ -15,30 +15,25 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Pull Docker Images
+      - name: Cache Docker Images
+        id: cache-docker-images
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/redis-image.tar.gz
+            ~/postgres-image.tar.gz
+          key: docker-images-redis-6.2.6-postgres-14.2
+
+      - name: Pull and Save Images
+        if: steps.cache-docker-images.outputs.cache-hit != 'true'
         run: |
           docker pull redis:6.2.6
+          docker save redis:6.2.6 | gzip > ~/redis-image.tar.gz
           docker pull postgres:14.2
+          docker save postgres:14.2 | gzip > ~/postgres-image.tar.gz
 
-#      - name: Cache Docker Images
-#        id: cache-docker-images
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            ~/redis-image.tar.gz
-#            ~/postgres-image.tar.gz
-#          key: docker-images-redis-6.2.6-postgres-14.2
-#
-#      - name: Pull and Save Images
-#        if: steps.cache-docker-images.outputs.cache-hit != 'true'
-#        run: |
-#          docker pull redis:6.2.6
-#          docker save redis:6.2.6 | gzip > ~/redis-image.tar.gz
-#          docker pull postgres:14.2
-#          docker save postgres:14.2 | gzip > ~/postgres-image.tar.gz
-#
-#      - name: Load Images from Cache
-#        if: steps.cache-docker-images.outputs.cache-hit == 'true'
-#        run: |
-#          gunzip -c ~/redis-image.tar.gz | docker load
-#          gunzip -c ~/postgres-image.tar.gz | docker load
+      - name: Load Images from Cache
+        if: steps.cache-docker-images.outputs.cache-hit == 'true'
+        run: |
+          gunzip -c ~/redis-image.tar.gz | docker load
+          gunzip -c ~/postgres-image.tar.gz | docker load
