@@ -23,7 +23,7 @@ func dockerOutput(args ...string) (string, error) {
 }
 
 func dockerRun(args ...string) error {
-	return sh.Run("time "+dockerBinary(), args...)
+	return sh.Run(dockerBinary(), args...)
 }
 
 func dockerBuildxVersion() (*semver.Version, error) {
