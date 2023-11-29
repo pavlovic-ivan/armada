@@ -89,6 +89,9 @@ func Tests() error {
 	}
 	cmd = append(cmd, internalPackages...)
 
+	commandString := Gotestsum + " " + strings.Join(cmd, " ")
+	fmt.Println("Executing command:", commandString)
+
 	testCmd := exec.Command(Gotestsum, cmd...)
 
 	// If -verbose was set, we let os.Stdout handles the output.
