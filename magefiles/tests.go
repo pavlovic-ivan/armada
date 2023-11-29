@@ -3,13 +3,14 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/magefile/mage/mg"
-	"github.com/magefile/mage/sh"
 	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/magefile/mage/mg"
+	"github.com/magefile/mage/sh"
 )
 
 var Gotestsum string
@@ -88,9 +89,6 @@ func Tests() error {
 		"./pkg/...",
 	}
 	cmd = append(cmd, internalPackages...)
-
-	commandString := Gotestsum + " " + strings.Join(cmd, " ")
-	fmt.Println("Executing command:", commandString)
 
 	testCmd := exec.Command(Gotestsum, cmd...)
 
