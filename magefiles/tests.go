@@ -3,15 +3,13 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"github.com/magefile/mage/mg"
+	"github.com/magefile/mage/sh"
 	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
-	"time"
-
-	"github.com/magefile/mage/mg"
-	"github.com/magefile/mage/sh"
 )
 
 var Gotestsum string
@@ -53,24 +51,15 @@ func Tests() error {
 		return err
 	}
 
-	startTime := time.Now()
-
 	err = dockerRun("run", "-d", "--name=redis", docker_Net, "-p=6379:6379", "redis:6.2.6")
 	if err != nil {
 		return err
 	}
 
-	duration := time.Since(startTime)
-	fmt.Printf("Command executed in %s\n", duration)
-
-	startTime2 := time.Now()
 	err = dockerRun("run", "-d", "--name=postgres", docker_Net, "-p", "5432:5432", "-e", "POSTGRES_PASSWORD=psw", "postgres:14.2")
 	if err != nil {
 		return err
 	}
-
-	duration2 := time.Since(startTime2)
-	fmt.Printf("Command executed in %s\n", duration2)
 
 	defer func() {
 		if err := dockerRun("rm", "-f", "redis", "postgres"); err != nil {
