@@ -55,7 +55,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
 
   python-client-integration-tests:
-    if: github.repository_owner == 'armadaproject'
+#    if: github.repository_owner == 'armadaproject'
     strategy:
       fail-fast: false
       matrix:

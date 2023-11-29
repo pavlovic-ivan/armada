@@ -73,7 +73,7 @@ jobs:
           path: third_party/airflow
           github-token: ${{secrets.GITHUB_TOKEN}}
   airflow-integration-tests:
-    if: github.repository_owner == 'armadaproject'
+#    if: github.repository_owner == 'armadaproject'
     strategy:
       fail-fast: false
       matrix:
