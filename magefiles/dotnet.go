@@ -96,6 +96,7 @@ func Dotnet() error {
 
 // Pack dotnet clients nuget. Requires RELEASE_TAG env var to be set
 func PackNuget() error {
+	mg.Deps(BootstrapTools)
 	mg.Deps(initializeDotnetRequirements, dotnetSetup, Proto)
 	fmt.Println("Pack Nuget...")
 
