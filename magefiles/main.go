@@ -137,7 +137,6 @@ func HelmDocs() error {
 
 // Generate Protos.
 func Proto() {
-	mg.Deps(BootstrapTools)
 	mg.Deps(BootstrapProto)
 	mg.Deps(protoGenerate)
 }
