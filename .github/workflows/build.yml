@@ -84,9 +84,9 @@ jobs:
       - name: Pack dotnet clients
         env:
           RELEASE_TAG: ${{ steps.create-release-tag.outputs.release_tag }}
-        run: |
+        run: go run github.com/magefile/mage@v1.14.0 -v packNuget
 #          go run github.com/magefile/mage@v1.14.0 -v download
-          go run github.com/magefile/mage@v1.14.0 -v packNuget
+#          go run github.com/magefile/mage@v1.14.0 -v packNuget
 
       - name: Save nupkg artifacts
         uses: actions/upload-artifact@v3
