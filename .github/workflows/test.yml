@@ -218,9 +218,13 @@ jobs:
 
       - name: Setup dependencies
         run: |
+          go get github.com/gogo/protobuf
           go install github.com/gogo/protobuf
+          go get github.com/grpc-ecosystem/grpc-gateway
           go install github.com/grpc-ecosystem/grpc-gateway
+          go get k8s.io/api
           go install k8s.io/api
+          go get k8s.io/apimachinery
           go install k8s.io/apimachinery
 #          go run github.com/magefile/mage@v1.14.0 -v download
 
