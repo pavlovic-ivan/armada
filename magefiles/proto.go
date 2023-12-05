@@ -44,21 +44,27 @@ func protoPrepareThirdPartyProtos() error {
 		},
 	}
 
-	goPath, err := goEnv("GOPATH")
+	goModPath, err := goEnv("GOMODCACHE")
 	if err != nil {
-		return errors.Errorf("error getting GOPATH: %v", err)
+		return errors.Errorf("error getting GOMODCACHE: %v", err)
 	}
-	if goPath == "" {
-		return errors.New("error GOPATH is not set")
+	if goModPath == "" {
+		return errors.New("error GOMODCACHE is not set")
 	}
-	goModPath := filepath.Join(goPath, "pkg", "mod")
+
 	for _, module := range modules {
+		err = goRun("mod", "download", module.name)
+		if err != nil {
+			return err
+		}
+
 		version, err := goModuleVersion(module.name)
 		if err != nil {
 			return err
 		}
 		relModPath := filepath.FromSlash(module.name)
 		relModPathWithVersion := relModPath + "@" + version
+
 		err = filepath.WalkDir(filepath.Join(goModPath, relModPathWithVersion), func(path string, d fs.DirEntry, err error) error {
 			if (d != nil && d.IsDir()) || filepath.Ext(path) != ".proto" {
 				return nil
