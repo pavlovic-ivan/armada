@@ -59,7 +59,7 @@ jobs:
       id: tools-cache
       with:
         path: ${{ steps.tools-cache-info.outputs.path }}
-        key: tools-go-${{ steps.setup-go.outputs.go-version }}-make-${{ hashFiles('tools.yaml') }}
+        key: tools-go-${{ steps.setup-go.outputs.go-version }}-tools-${{ hashFiles('tools.yaml') }}
 
     - name: Mage Proto
       run: go run github.com/magefile/mage@v1.14.0 -v proto
