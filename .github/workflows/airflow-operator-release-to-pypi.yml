@@ -1,7 +1,10 @@
 name: Release Airflow Operator to PYPI
 
 on:
-  workflow_dispatch: {}
+#  workflow_dispatch: {}
+  push:
+    branches:
+      - "ci-improvements-part8"
 
 jobs:
   run-python-tests:
