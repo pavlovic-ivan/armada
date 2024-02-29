@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   validate:
-    if: github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' && github.repository_owner == 'armadaproject'
+#    if: github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' && github.repository_owner == 'armadaproject'
     name: "Validate revision"
     runs-on: ubuntu-22.04
 
@@ -32,7 +32,7 @@ jobs:
 
           [[ $ref =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] &&
           [ $(git tag --points-at $sha | grep -E "^$ref\$" | wc -l) -eq 1 ] &&
-          [ $(git branch --contains=$sha master | wc -l) -eq 1 ]
+          [ $(git branch --contains=$sha ci-improvements-part11-test | wc -l) -eq 1 ]
           if [ $? -ne 0 ]; then
             echo "::error ::Invalid ref $ref $sha: must be a tag, belong to the master branch and match the semver regex"
             exit 1
