@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 
 	"github.com/armadaproject/armada/internal/armadactl"
@@ -8,6 +9,7 @@ import (
 
 func analyzeCmd() *cobra.Command {
 	a := armadactl.New()
+	fmt.Println("Demo line")
 	cmd := &cobra.Command{
 		Use:     "analyze <queue> <jobSet>",
 		Aliases: []string{"gen"},
