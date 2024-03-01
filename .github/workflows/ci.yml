@@ -1,5 +1,5 @@
 name: CI
-
+# Just a comment
 on:
   push:
     tags:
