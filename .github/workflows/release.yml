@@ -1,5 +1,5 @@
 name: Release Armada components
-
+# Just a comment
 on:
   workflow_run:
     types: [completed]
