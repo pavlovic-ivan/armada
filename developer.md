@@ -51,13 +51,13 @@ Please see these documents for more information about Armadas Design:
 
 ## Pre-requisites
 
-- [Go](https://go.dev/doc/install) (version 1.21 or later)
+- [Go](https://go.dev/doc/install) (version 1.23 or later)
 - gcc (for Windows, see, e.g., [tdm-gcc](https://jmeubank.github.io/tdm-gcc/))
 - [mage](https://magefile.org/)
 - [docker](https://docs.docker.com/get-docker/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [protoc](https://github.com/protocolbuffers/protobuf/releases)
-
+- [helm](https://helm.sh/docs/intro/install/) (version 3.10.0 or later)
 
 ## Using Mage
 
@@ -217,17 +217,15 @@ All outputs of delve can be found in the `./delve` directory.
 
 External Debug Port Mappings:
 
-|Armada service     |Debug host    |
-|-------------------|--------------|
-|server             |localhost:4000|
-|executor           |localhost:4001|
-|binoculars         |localhost:4002|
-|eventingester      |localhost:4003|
-|lookout            |localhost:4004|
-|lookoutv2          |localhost:4005|
-|lookoutingester    |localhost:4006|
-|lookoutingesterv2  |localhost:4007|
-|jobservice         |localhost:4008|
+| Armada service  | Debug host     |
+|-----------------|----------------|
+| server          | localhost:4000 |
+| executor        | localhost:4001 |
+| binoculars      | localhost:4002 |
+| eventingester   | localhost:4003 |
+| lookoutui       | localhost:4004 |
+| lookout         | localhost:4005 |
+| lookoutingester | localhost:4007 |
 
 
 ## GoLand Run Configurations
@@ -241,10 +239,10 @@ The following high-level configurations are provided, each composed of sub-confi
    - Runs Armada with the Legacy Scheduler
 3. `Armada (Pulsar Scheduler)`
    - Runs Armada with the Pulsar Scheduler (recommended)
-4. `LookoutV2 UI`
+4. `Lookout UI`
    - Script which configures a local UI development setup
 
-A minimal local Armada setup using these configurations would be `Armada Infrastructure Services` and one of (`Armada (Legacy Scheduler)` or `Armada (Pulsar Scheduler)`). Running the `LookoutV2 UI` script on top of this configuration would allow you to develop the Lookout UI live from GoLand, and see the changes visible in your browser. **These configurations (executor specifically) require a kubernetes config in `$PROJECT_DIR$/.kube/internal/config`**
+A minimal local Armada setup using these configurations would be `Armada Infrastructure Services` and one of (`Armada (Legacy Scheduler)` or `Armada (Pulsar Scheduler)`). Running the `Lookout UI` script on top of this configuration would allow you to develop the Lookout UI live from GoLand, and see the changes visible in your browser. **These configurations (executor specifically) require a kubernetes config in `$PROJECT_DIR$/.kube/internal/config`**
 
 GoLand does not allow us to specify an ordering for services within docker compose configurations. As a result, some database migration services may require rerunning.
 
