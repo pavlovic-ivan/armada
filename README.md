@@ -1,4 +1,4 @@
-<div align="center">
+ <div align="center">
  <img src="./logo.svg" alt="Armada logo" width="200"/>
  <p>
   <a href="https://circleci.com/gh/armadaproject/armada"><img src="https://circleci.com/gh/helm/helm.svg?style=shield" alt="CircleCI"></a>
