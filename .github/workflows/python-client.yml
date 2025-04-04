@@ -91,3 +91,13 @@ jobs:
           version: '23.3'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: go run github.com/magefile/mage@v1.14.0 -v teste2epython
+
+  all-required-checks-done:
+    name: All required checks done
+    needs:
+      - python-client-tox
+      - python-client-integration-tests
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - run: echo "All required checks done"
