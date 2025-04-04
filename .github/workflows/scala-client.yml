@@ -118,3 +118,12 @@ jobs:
         working-directory: client/scala/armada-scala-client
         run: mvn --batch-mode package -DskipTests -Dspotless.check.skip
         shell: bash
+
+  all-required-checks-done:
+    name: All required checks done
+    needs:
+      - scala-client-test
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - run: echo "All required checks done"
